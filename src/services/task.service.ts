@@ -91,4 +91,31 @@ export class TaskService {
       throw new Error('Error de conexión con el servidor');
     }
   }
+
+  static async deleteTask(taskId: number): Promise<void> {
+    try {
+      const token = authStorage.getToken();
+
+      if (!token) {
+        throw new Error('No hay token de autenticación');
+      }
+
+      const response = await fetch(`${API_ENDPOINTS.TASKS}/${taskId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar la tarea');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Error de conexión con el servidor');
+    }
+  }
 }

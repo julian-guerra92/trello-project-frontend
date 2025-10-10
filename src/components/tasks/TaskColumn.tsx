@@ -8,6 +8,8 @@ interface TaskColumnProps {
   onDragStart: (task: Task) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: (status: TaskStatus) => void;
+  onEdit: (task: Task) => void;
+  onDelete: (taskId: number) => void;
 }
 
 export const TaskColumn: React.FC<TaskColumnProps> = ({
@@ -16,6 +18,8 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
   onDragStart,
   onDragOver,
   onDrop,
+  onEdit,
+  onDelete,
 }) => {
   const config = TASK_STATUS_CONFIG[status];
 
@@ -40,7 +44,13 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
           </div>
         ) : (
           tasks.map((task) => (
-            <TaskCard key={task.id} task={task} onDragStart={onDragStart} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              onDragStart={onDragStart}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           ))
         )}
       </div>
