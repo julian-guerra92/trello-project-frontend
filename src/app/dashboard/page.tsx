@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { TaskBoard } from '@/components/tasks/TaskBoard';
 import { authStorage } from '@/utils/auth';
 import { User } from '@/types/api.types';
 
@@ -21,7 +22,7 @@ function DashboardContent() {
   };
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen bg-base-200 flex flex-col">
       <div className="navbar bg-base-100 shadow-lg">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">Task Manager</a>
@@ -59,57 +60,15 @@ function DashboardContent() {
         </div>
       </div>
 
-      <div className="container mx-auto p-6">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">
-            Bienvenido al Dashboard
-          </h1>
+      <div className="flex-1 container mx-auto p-6">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold mb-2">Tablero de Tareas</h1>
           <p className="text-base-content/60">
-            Panel de gestión de tareas estilo Trello
+            Gestiona tus tareas de manera eficiente
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">Tareas Pendientes</h2>
-              <p className="text-4xl font-bold text-primary">0</p>
-            </div>
-          </div>
-
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">En Progreso</h2>
-              <p className="text-4xl font-bold text-warning">0</p>
-            </div>
-          </div>
-
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">Completadas</h2>
-              <p className="text-4xl font-bold text-success">0</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <div className="alert alert-info">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="stroke-current shrink-0 w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            <span>Tablero de tareas en construcción</span>
-          </div>
-        </div>
+        <TaskBoard />
       </div>
     </div>
   );
